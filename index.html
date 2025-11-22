@@ -1,1 +1,677 @@
-テスト
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Saekon Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 雰囲気：シンプルだけどちょっとネオンっぽいアクセント -->
+  <style>
+    :root {
+      --bg: #050608;
+      --bg-card: #11131a;
+      --accent: #ff7ad9;
+      --accent-soft: rgba(255, 122, 217, 0.15);
+      --text-main: #f5f5f7;
+      --text-sub: #b3b6c5;
+      --border-subtle: #292b35;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.6);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "ヒラギノ角ゴ ProN", "Yu Gothic", sans-serif;
+      background: radial-gradient(circle at top, #181b26 0, #050608 55%);
+      color: var(--text-main);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    /* ===== ヘッダー ===== */
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 20% 0, #ffe0ff, #ff7ad9 40%, #5136ff 100%);
+      box-shadow: 0 0 18px rgba(255, 122, 217, 0.6);
+    }
+
+    .logo-text-main {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .logo-text-sub {
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    nav {
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .nav-link {
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      color: var(--text-sub);
+      cursor: pointer;
+      transition: 0.18s ease;
+      backdrop-filter: blur(16px);
+    }
+
+    .nav-link:hover {
+      border-color: var(--accent-soft);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-main);
+    }
+
+    .nav-link.primary {
+      border-color: var(--accent-soft);
+      background: linear-gradient(135deg, rgba(255, 122, 217, 0.16), rgba(81, 54, 255, 0.16));
+      color: var(--accent);
+    }
+
+    /* ===== ヒーローセクション ===== */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .hero-text {
+      padding: 22px 22px 24px;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(255, 122, 217, 0.15), transparent 55%),
+                  rgba(6, 8, 18, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 3px 10px 3px 4px;
+      border-radius: var(--radius-pill);
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 11px;
+      color: var(--text-sub);
+      margin-bottom: 14px;
+    }
+
+    .hero-pill-badge {
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 122, 217, 0.18);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: clamp(26px, 4vw, 32px);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #ffb8f0, #ff7ad9, #d7d5ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 18px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(8, 10, 18, 0.7);
+      color: var(--text-sub);
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      font-size: 13px;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-main);
+      transition: 0.18s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ff7ad9, #b55dff);
+      border-color: transparent;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.7);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.9);
+    }
+
+    .btn-ghost {
+      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.25);
+      color: var(--text-sub);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent-soft);
+      color: var(--text-main);
+    }
+
+    .hero-visual {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at top, rgba(255, 122, 217, 0.1), transparent 60%),
+                  rgba(7, 8, 16, 0.95);
+      padding: 18px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero-thumb {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      aspect-ratio: 16 / 9;
+      background: radial-gradient(circle at center, #24273a, #090b10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .hero-thumb-note {
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    /* ===== セクション共通 ===== */
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      gap: 8px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    /* ===== About ===== */
+
+    .about-card {
+      border-radius: var(--radius-lg);
+      background: rgba(7, 9, 18, 0.9);
+      border: 1px solid var(--border-subtle);
+      padding: 18px 18px 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    .about-body {
+      font-size: 13px;
+      color: var(--text-main);
+    }
+
+    .about-list {
+      font-size: 12px;
+      color: var(--text-sub);
+      list-style: none;
+      display: grid;
+      gap: 6px;
+    }
+
+    .about-list-label {
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    /* ===== Works ===== */
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .work-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #090b11;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+    }
+
+    .work-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-soft);
+      border-color: rgba(255, 122, 217, 0.5);
+    }
+
+    .work-thumb {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+
+    .work-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.03);
+    }
+
+    .work-body {
+      padding: 10px 11px 11px;
+    }
+
+    .work-title {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .work-meta {
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    .work-tag-row {
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .work-tag {
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-sub);
+    }
+
+    /* ===== Contact ===== */
+
+    .contact-card {
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 16px;
+      background: linear-gradient(135deg, rgba(255, 122, 217, 0.1), rgba(81, 54, 255, 0.08));
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      font-size: 13px;
+    }
+
+    .contact-main {
+      max-width: 520px;
+    }
+
+    .contact-label {
+      font-size: 11px;
+      color: var(--text-sub);
+      margin-bottom: 2px;
+    }
+
+    .contact-mail {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    footer {
+      margin-top: 32px;
+      font-size: 11px;
+      color: var(--text-sub);
+      text-align: center;
+    }
+
+    /* ===== スマホ対応 ===== */
+
+    @media (max-width: 768px) {
+      .page {
+        padding: 20px 14px 48px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .about-card {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="logo">
+      <div class="logo-mark"></div>
+      <div>
+        <div class="logo-text-main">Saekon Portfolio</div>
+        <div class="logo-text-sub">Animation / Layout / Storyboard</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#works" class="nav-link">Works</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#contact" class="nav-link primary">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-pill">
+        <span class="hero-pill-badge">Portfolio</span>
+        <span>アニメーター志望・制作進行見習い</span>
+      </div>
+
+      <h1 class="hero-title">
+        27歳から本気で<span>アニメ業界</span>を目指す、<br>
+        サエコンのポートフォリオサイト。
+      </h1>
+
+      <p class="hero-sub">
+        クロッキー、レイアウト、動きのラフ、3DCGの基礎など、<br>
+        「現場で使える画力」を意識した習作と作品をまとめています。
+      </p>
+
+      <div class="hero-tags">
+        <span class="tag">2D Animation / 原画候補</span>
+        <span class="tag">Layout &amp; Composition</span>
+        <span class="tag">Blender 基礎</span>
+        <span class="tag">東京近郊 在住</span>
+      </div>
+
+      <div class="hero-buttons">
+        <a href="#works" class="btn btn-primary">作品一覧を見る</a>
+        <!-- PDF作品集へのリンクなど -->
+        <a href="YOUR_PDF_URL_HERE" class="btn btn-ghost" target="_blank" rel="noopener">
+          PDFポートフォリオを開く
+        </a>
+      </div>
+    </div>
+
+    <aside class="hero-visual">
+      <div class="hero-thumb">
+        <!-- ここにトップ画像を入れる（例：まとめ画像） -->
+        <!-- <img src="images/top-thumbnail.jpg" alt="メイン作品サムネイル"> -->
+        トップ用のサムネイル画像をここに配置
+      </div>
+      <div class="hero-thumb-note">
+        ※ 上の画像は任意の代表カット（レイアウト、アクションカットなど）に差し替えてください。
+      </div>
+    </aside>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section id="about">
+    <div class="section-header">
+      <h2 class="section-title">About</h2>
+      <p class="section-subtitle">自己紹介と、目指しているクリエイター像。</p>
+    </div>
+
+    <div class="about-card">
+      <div class="about-body">
+        <p style="margin-bottom: 10px;">
+          佐伯 真実（サエコン）と申します。アニメ専門学校2年生として、<br>
+          原画・動画・レイアウトを中心に、日々クロッキーと作品制作を続けています。
+        </p>
+        <p style="margin-bottom: 10px;">
+          27歳からの挑戦だからこそ、<br>
+          「量」と「改善サイクル」を誰よりも回すことを強みとしています。<br>
+          1枚ごとの試行錯誤と振り返りを徹底し、実務で使える形に落とし込むことを意識しています。
+        </p>
+        <p>
+          本サイトでは、動きのあるカット、レイアウト、デッサン・クロッキー、<br>
+          簡単な3D補助までをまとめ、作品ごとに狙いと反省点を記録しています。
+        </p>
+      </div>
+
+      <ul class="about-list">
+        <li>
+          <div class="about-list-label">Name</div>
+          サエコン / 佐伯 真実
+        </li>
+        <li>
+          <div class="about-list-label">Field</div>
+          2D Animation（原画候補） / Layout / 3D補助（Blender）
+        </li>
+        <li>
+          <div class="about-list-label">Base</div>
+          東京近郊
+        </li>
+        <li>
+          <div class="about-list-label">Tools</div>
+          Clip Studio Paint, Photoshop, Blender, TVPaint（学校環境）
+        </li>
+        <li>
+          <div class="about-list-label">Goal</div>
+          TVシリーズや劇場作品のアクション・感情表現カットを任されるアニメーターになること。
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Works ===== -->
+  <section id="works">
+    <div class="section-header">
+      <h2 class="section-title">Works</h2>
+      <p class="section-subtitle">クロッキー・レイアウト・原画ラフなどのピックアップ。</p>
+    </div>
+
+    <div class="works-grid">
+      <!-- ▼ 作品カードの例。必要な数だけコピペして使う ▼ -->
+
+      <a class="work-card" href="YOUR_WORK1_LINK_HERE" target="_blank" rel="noopener">
+        <div class="work-thumb">
+          <!-- 実際のサムネイル画像に差し替え -->
+          <!-- <img src="images/work1-thumb.jpg" alt="作品1サムネイル"> -->
+        </div>
+        <div class="work-body">
+          <div class="work-title">アクションカット集「波動フォース」</div>
+          <div class="work-meta">Original animation / Clip Studio Paint</div>
+          <div class="work-tag-row">
+            <span class="work-tag">アクション</span>
+            <span class="work-tag">フォース</span>
+            <span class="work-tag">1〜2秒カット集</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="work-card" href="YOUR_WORK2_LINK_HERE" target="_blank" rel="noopener">
+        <div class="work-thumb">
+          <!-- <img src="images/work2-thumb.jpg" alt="作品2サムネイル"> -->
+        </div>
+        <div class="work-body">
+          <div class="work-title">レイアウト・美術意識カット集</div>
+          <div class="work-meta">Layout / Background rough</div>
+          <div class="work-tag-row">
+            <span class="work-tag">レイアウト</span>
+            <span class="work-tag">パース</span>
+            <span class="work-tag">カメラワーク</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="work-card" href="YOUR_WORK3_LINK_HERE" target="_blank" rel="noopener">
+        <div class="work-thumb">
+          <!-- <img src="images/work3-thumb.jpg" alt="作品3サムネイル"> -->
+        </div>
+        <div class="work-body">
+          <div class="work-title">クロッキー・動きのラフ集</div>
+          <div class="work-meta">Croquis / Gesture drawing</div>
+          <div class="work-tag-row">
+            <span class="work-tag">30秒〜2分</span>
+            <span class="work-tag">フォース練習</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="work-card" href="YOUR_WORK4_LINK_HERE" target="_blank" rel="noopener">
+        <div class="work-thumb">
+          <!-- <img src="images/work4-thumb.jpg" alt="作品4サムネイル"> -->
+        </div>
+        <div class="work-body">
+          <div class="work-title">Blender補助を使ったカット研究</div>
+          <div class="work-meta">3D layout / Camera work</div>
+          <div class="work-tag-row">
+            <span class="work-tag">Blender</span>
+            <span class="work-tag">カメラワーク</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- ▲ ここまで作品カード例 ▲ -->
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="contact">
+    <div class="section-header">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-subtitle">ご連絡はメール、または学校宛てにてお願いいたします。</p>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-main">
+        <div class="contact-label">Mail</div>
+        <div class="contact-mail">
+          <!-- 実際のメールアドレスに変更 -->
+          <a href="mailto:YOUR_MAIL_ADDRESS_HERE">YOUR_MAIL_ADDRESS_HERE</a>
+        </div>
+        <p style="margin-top: 8px;">
+          採用・作品に関するお問い合わせは、上記メールアドレス、<br>
+          または学校経由でご連絡いただけますと幸いです。
+        </p>
+      </div>
+
+      <div>
+        <a class="btn btn-primary" href="mailto:YOUR_MAIL_ADDRESS_HERE">
+          メールソフトを開く
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> Saekon. All Rights Reserved.
+  </footer>
+
+</div>
+
+<script>
+  // フッターの西暦を自動で現在年にする
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
